@@ -1,0 +1,157 @@
+public class googleMaps {
+    
+    public string duration {get;set;}
+    public decimal distance {get; set;}
+    public integer travelTime {get; set;}
+
+//  THIS IS NOT A UNIVERSAL METHOD; IT IS REQUIRED THAT THE ARGUMENT SUPPLIED CONSIST OF CSV...
+    
+
+    
+    public string getJsonResults (string address1, string address2) {
+        
+        HttpRequest req = new HttpRequest();
+        Http http = new http();
+        
+        req.setmethod('GET');
+
+
+//  DO NOT TOUCH !!! UNLESS GOOGLE CHANGES THEIR QUERY SYNTAX
+        
+        String url = 'https://maps.googleapis.com/maps/api/distancematrix/json' +
+            
+            
+            
+            '?origins=' + address1 +
+            '&destinations=' + address2 +
+            '&mode=driving' +
+            '&departure_time=now' +
+            '&sensor=false' +
+            '&language=en' +
+            '&units=imperial' +
+            '&key=PUT YOUR OWN GOOGLE API SERVER KEY HERE';
+        
+        req.setendpoint(url);
+        system.debug(url);
+        
+        HttpResponse resp = http.send(req);
+        
+        string jsonresults = resp.getbody().replace('\n', '');     
+
+        return JsonResults;
+        
+    }
+
+
+    public String formatJsonResults(String value) {
+        
+        value = value.replace('{', ', ');
+        value = value.replace('}', ', ');
+        value = value.replace('[', ', ');
+        value = value.replace(']', ', ');
+        value = value.replace('"', '');
+        
+        return value;   
+    }
+
+    
+//  THIS IS A VOID METHOD BECAUSE IT ESSENTIALLY JUST SETS THE VALUES FOR DURATION, TRAVEL TIME AND DISTANCE.... WHICH ARE PUBLIC AND
+//  CAN BE ACCESSED FROM ANYWHERE IN EXECUTION CONTEXT....
+//  
+/*    MAYBE YOU WANT TO USE THIS METHOD UNDER CERTAIN USE-CASES, BUT NOT THIS ONE....
+    public void updateJsonSections(
+        String jsonResults) {
+        
+        List <String> jsonSections = jsonResults.split(', ');
+        
+        for (Integer i = 0; i < jsonSections.size(); i++) {
+            jsonSections[i] = jsonSections[i].trim();
+            
+            if (jsonSections[i].contains('duration:')) {
+                duration = parseDuration(jsonSections[i + 2]);
+                travelTime = parseTravelTime(duration);
+            }
+            
+            if (jsonSections[i].contains('distance:')) {
+                distance = parseDistance(jsonSections[i + 2]);
+            }
+        }
+    }
+*/
+    public list <string> givemebackJsonSections (string value) {
+ /*       
+        value = value.replace('{', ', ');
+        value = value.replace('}', ', ');
+        value = value.replace('[', ', ');
+        value = value.replace(']', ', ');
+        value = value.replace('"', ''); 
+*/        
+        list <string> collectionofvalues = value.split(']');        
+        return collectionofvalues;
+    }
+
+
+    
+    public string justthedistance (list<string> input) {
+        string thedistance = '';
+        
+        for (Integer i = 0; i < input.size(); i++) {
+            input[i] = input[i].trim();
+            
+            if (input[i].contains('distance:')) {
+                thedistance = input[i + 2];
+            }    
+        }
+        
+        return thedistance;       
+        
+    }
+/*    
+    public Decimal parseDistance(String value) {
+        value = value.replace('text: ', '');
+        value = value.replace(' mi', '');
+        value = value.replace(' ft', '');
+        value = value.replace(',', '');
+        value = value.trim();
+        
+        return Decimal.valueOf(value);
+    }
+    
+    public String parseDuration(String value) {
+        value = value.replace('text: ', '');
+        
+        return value;
+    }
+    
+    public Integer parseTravelTime(String value) {
+    
+        Integer tmpMinutes = 0;
+    
+        List<String> durationNodes = value.split(' ');
+        String prevDurationNode = '';
+        
+        for (String durationNode : durationNodes) {
+            if (durationNode == 'day' || durationNode == 'days') {
+                tmpMinutes += Integer.valueOf(prevDurationNode) * 1440;
+            }
+            if (durationNode == 'hour' || durationNode == 'hours') {
+                tmpMinutes += Integer.valueOf(prevDurationNode) * 60;
+            }
+            if (durationNode == 'min' || durationNode == 'mins') {
+                tmpMinutes += Integer.valueOf(prevDurationNode);
+            }
+            
+            prevDurationNode = durationNode;
+        }
+    
+        return tmpMinutes;  
+    }
+    
+    
+   */ 
+    
+
+
+    
+
+}
