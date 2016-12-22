@@ -4,7 +4,8 @@ public class googleMaps {
     public decimal distance {get; set;}
     public integer travelTime {get; set;}
 
-//  THIS IS NOT A UNIVERSAL METHOD; IT IS REQUIRED THAT THE ARGUMENT SUPPLIED CONSIST OF CSV...
+//  REQUIRED THAT THE ADDRESS ARGUMENTS SUPPLIED CONSIST OF CSV...
+//  GOOGLE WILL BE AS SPECIFIC AS YOU ARE..
     
 
     
@@ -19,8 +20,6 @@ public class googleMaps {
 //  GOOGLE ENDPONT AND QUERY SYNTAX
         
         String url = 'https://maps.googleapis.com/maps/api/distancematrix/json' +
-            
-            
             
             '?origins=' + address1 +
             '&destinations=' + address2 +
@@ -55,37 +54,8 @@ public class googleMaps {
     }
 
     
-//  THIS IS A VOID METHOD BECAUSE IT ESSENTIALLY JUST SETS THE VALUES FOR DURATION, TRAVEL TIME AND DISTANCE.... WHICH ARE PUBLIC AND
-//  CAN BE ACCESSED FROM ANYWHERE IN EXECUTION CONTEXT....
-//  
-/*    MAYBE YOU WANT TO USE THIS METHOD UNDER CERTAIN USE-CASES, BUT NOT THIS ONE....
-    public void updateJsonSections(
-        String jsonResults) {
-        
-        List <String> jsonSections = jsonResults.split(', ');
-        
-        for (Integer i = 0; i < jsonSections.size(); i++) {
-            jsonSections[i] = jsonSections[i].trim();
-            
-            if (jsonSections[i].contains('duration:')) {
-                duration = parseDuration(jsonSections[i + 2]);
-                travelTime = parseTravelTime(duration);
-            }
-            
-            if (jsonSections[i].contains('distance:')) {
-                distance = parseDistance(jsonSections[i + 2]);
-            }
-        }
-    }
-*/
     public list <string> givemebackJsonSections (string value) {
- /*       
-        value = value.replace('{', ', ');
-        value = value.replace('}', ', ');
-        value = value.replace('[', ', ');
-        value = value.replace(']', ', ');
-        value = value.replace('"', ''); 
-*/        
+
         list <string> collectionofvalues = value.split(']');        
         return collectionofvalues;
     }
