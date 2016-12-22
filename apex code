@@ -16,7 +16,7 @@ public class googleMaps {
         req.setmethod('GET');
 
 
-//  DO NOT TOUCH !!! UNLESS GOOGLE CHANGES THEIR QUERY SYNTAX
+//  GOOGLE ENDPONT AND QUERY SYNTAX
         
         String url = 'https://maps.googleapis.com/maps/api/distancematrix/json' +
             
@@ -106,52 +106,5 @@ public class googleMaps {
         return thedistance;       
         
     }
-/*    
-    public Decimal parseDistance(String value) {
-        value = value.replace('text: ', '');
-        value = value.replace(' mi', '');
-        value = value.replace(' ft', '');
-        value = value.replace(',', '');
-        value = value.trim();
-        
-        return Decimal.valueOf(value);
-    }
-    
-    public String parseDuration(String value) {
-        value = value.replace('text: ', '');
-        
-        return value;
-    }
-    
-    public Integer parseTravelTime(String value) {
-    
-        Integer tmpMinutes = 0;
-    
-        List<String> durationNodes = value.split(' ');
-        String prevDurationNode = '';
-        
-        for (String durationNode : durationNodes) {
-            if (durationNode == 'day' || durationNode == 'days') {
-                tmpMinutes += Integer.valueOf(prevDurationNode) * 1440;
-            }
-            if (durationNode == 'hour' || durationNode == 'hours') {
-                tmpMinutes += Integer.valueOf(prevDurationNode) * 60;
-            }
-            if (durationNode == 'min' || durationNode == 'mins') {
-                tmpMinutes += Integer.valueOf(prevDurationNode);
-            }
-            
-            prevDurationNode = durationNode;
-        }
-    
-        return tmpMinutes;  
-    }
-    
-    
-   */ 
-    
-
-
-    
 
 }
